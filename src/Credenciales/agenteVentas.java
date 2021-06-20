@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @author dell
  */
 
-public class agenteVentas {
+public class agenteVentas extends Usuario{
     private String nombre;
     private String cedula;
     private String correo;
     private String codigoAgente;
-    private ArrayList<Propiedad> propiedades;
+    private ArrayList<Object> propiedades= new ArrayList<>();
 }
