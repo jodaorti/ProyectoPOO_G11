@@ -6,10 +6,11 @@
 
 /**
  *
- * @author 59399
+ * @author Henry Arauz
  */
 
 public class Usuario {
+    
     String user;
     String password;
     
