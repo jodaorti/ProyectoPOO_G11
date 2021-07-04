@@ -3,12 +3,14 @@ package utils;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import modelo.AgenteVentas;
 import modelo.Casa;
 import modelo.Cliente;
 import modelo.Sistema;
 import modelo.Terreno;
 import modelo.Ubicacion;
+import modelo.Usuario;
 import tipos.Enum.tipoTerreno;
 
 public class ClassUtils {
@@ -110,4 +112,24 @@ public class ClassUtils {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(fecha, pattern);        
     }
+    
+    
+    /**
+    * Ingresa los datos del usuario a verificar, si es asi devuelve true caso contrario false
+    * Dos de estas propiedades deben estar en la misma ciudad y sector. 
+     * @param usuarios
+     * @param usuario
+     * @return 
+    */
+    public static boolean verificarUsuarioSistema(ArrayList<Usuario> usuarios, Usuario usuario)
+    {
+        for(Usuario us : usuarios)
+        {
+            if(usuario.getUsuario().trim().equalsIgnoreCase(us.getUsuario().trim()) && 
+               usuario.getContrasenia().trim().equalsIgnoreCase(us.getContrasenia().trim()))
+                return true;            
+        }
+        return false; 
+    }        
+     
 }
