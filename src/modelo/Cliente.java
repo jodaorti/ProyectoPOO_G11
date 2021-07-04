@@ -1,4 +1,4 @@
-package Credenciales;
+package modelo;
 import java.util.ArrayList;
 
 /*
