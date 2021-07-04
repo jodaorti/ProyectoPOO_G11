@@ -5,16 +5,30 @@
  */
 package modelo;
 
-import java.lang.reflect.Array;
-
 /**
  *
  * @author dell
  */
-public class Propiedad {
+public class Propiedad 
+{   
+    private String codigoPropiedad;
     private double precio;
     private double metrosAncho;
     private double profundidad;
-    private Array ubicacion;
-    private String codigoPropiedad;
+    private Ubicacion ubicacion;    
+    
+    public Propiedad()
+    {
+        
+    }
+
+    public Propiedad(String codigoPropiedad, double precio, double metrosAncho, double profundidad, Ubicacion ubicacion) {
+        this.codigoPropiedad = codigoPropiedad;
+        this.precio = precio;
+        this.metrosAncho = metrosAncho;
+        this.profundidad = profundidad;
+        this.ubicacion = ubicacion;
+    }
+    
+    
 }

@@ -1,5 +1,7 @@
 package modelo;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,11 +13,63 @@ import java.util.ArrayList;
  *
  * @author 59399
  */
-public class Cliente extends Usuario {
-    String nombre;
-    String cedula;
-    String correo;
-    String fechaNacimiento;
+public class Cliente extends Usuario 
+{
+    private String nombre;
+    private String cedula;
+    private String correo;
+    private LocalDate  fechaNacimiento;
+    
+    public Cliente()
+    {
+        
+    }
+
+    public Cliente(String usuario, String contrasenia,String nombre,
+                   String cedula, String correo, LocalDate fechaNacimiento) {
+        super(usuario, contrasenia);
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.correo = correo;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
+    
+    
+    
     /*
     Muestra al cliente las propiedades en venta con o sin filtros de precio,tipo,ciudad o sector aplicados
     */
