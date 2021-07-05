@@ -22,7 +22,7 @@ public class Usuario
     
     public Usuario(String usuario, String contrasenia) {
         this.usuario = usuario;
-        this.contrasenia = contrasenia;
+        //this.contrasenia = contrasenia;
     }
 
     public String getUsuario() {

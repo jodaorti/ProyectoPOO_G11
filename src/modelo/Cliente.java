@@ -2,6 +2,9 @@ package modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
+import utils.ClassUtils;
+import utils.ValidatorUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -87,5 +90,42 @@ public class Cliente extends Usuario
         return cuotas;  
     }
     
-    
+    /**
+    * Registra el cliente a ingresar      
+     * @param sc
+     * @return 
+    */
+    public static Cliente registrarCliente(Scanner sc)
+    {
+        System.out.println("\n Registro de Cliente");
+                          
+        String usuario,contrasenia,nombre,cedula,correo,fechaNacimiento = "";  
+        LocalDate fechaNac;
+        
+        System.out.println("\nUsuario: ");
+        usuario = sc.nextLine();
+        System.out.println("Contraseña: ");
+        contrasenia = sc.nextLine();
+        System.out.println("Nombre: ");
+        nombre = sc.nextLine();
+        System.out.println("Cedula: ");
+        cedula = sc.nextLine();
+        System.out.println("Correo: ");
+        correo = sc.nextLine();
+        
+        do            
+        {
+            System.out.println("Fecha Nacimiento: ");
+            fechaNacimiento = sc.nextLine();                                 
+        }
+        while(!ValidatorUtils.validarFecha(fechaNacimiento));
+        
+        fechaNac = ClassUtils.StringToDate(fechaNacimiento);   
+        if(!ValidatorUtils.edadValidaRegistro(fechaNac))
+        {
+            System.out.println("La edad no es válida para registrar el cliente");
+            return null;
+        }        
+        return new Cliente(usuario,contrasenia, nombre, cedula, correo, fechaNac);
+    }
 }

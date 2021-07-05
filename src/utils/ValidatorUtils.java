@@ -1,5 +1,9 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+
 public class ValidatorUtils {
     
     /**
@@ -14,10 +18,17 @@ public class ValidatorUtils {
         String anio,mes,dia;
         if(fechaPart.length != 3)
             return false;
-        anio = fechaPart[2];
+        anio = fechaPart[0];
         mes  = fechaPart[1];
-        dia  = fechaPart[0];        
-        return !validarNumero(anio) || !validarNumero(mes) || !validarNumero(dia);                   
+        dia  = fechaPart[2];     
+        
+        boolean a,m,d = false;
+        
+        a = validarNumero(anio);
+        m = validarNumero(mes);
+        d = validarNumero(dia);
+        
+        return validarNumero(anio) && validarNumero(mes) && validarNumero(dia);                   
     }
     
     /**
@@ -36,5 +47,13 @@ public class ValidatorUtils {
                 return false;
         }
         return true;
+    }
+    
+    public static boolean edadValidaRegistro(LocalDate fechaNacimiento)
+    {
+        LocalDate fechaActual = LocalDate.now();
+        if ((fechaNacimiento != null)) 
+            return  Period.between(fechaNacimiento, fechaActual).getYears() >= 18;
+        return false;
     }
 }

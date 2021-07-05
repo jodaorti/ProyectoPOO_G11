@@ -38,7 +38,7 @@ public class ClassUtils {
         cedula = "1234";
         email  = "marina@gmail.com";
         AgenteVentas ag1 = new AgenteVentas(usuario,contrasenia,codigoAgente,nombre,cedula,email);
-        sistema.setListaAgentes(ag1);
+        sistema.agregarAgente(ag1);
 
         //Agente 2 
         usuario = "ag2";
@@ -48,7 +48,7 @@ public class ClassUtils {
         cedula = "2222";
         email  = "max@gmail.com";
         AgenteVentas ag2 = new AgenteVentas(usuario,contrasenia,codigoAgente,nombre,cedula,email);
-        sistema.setListaAgentes(ag2);
+        sistema.agregarAgente(ag2);
         
         
         // Crear cliente       
@@ -59,7 +59,7 @@ public class ClassUtils {
         email  = "marta@gmail.com";
         fechaNacimiento = StringToDate("2001-04-10");
         Cliente cli1 = new Cliente(usuario, contrasenia, nombre, cedula,email, fechaNacimiento);
-        sistema.setListaClientes(cli1);
+        sistema.agregarCliente(cli1);
         
         String codigoPropiedad;
         double precio,metrosAncho,profundidad;
@@ -121,15 +121,14 @@ public class ClassUtils {
      * @param usuario
      * @return 
     */
-    public static boolean verificarUsuarioSistema(ArrayList<Usuario> usuarios, Usuario usuario)
+    public static Usuario verificarUsuarioSistema(ArrayList<Usuario> usuarios, Usuario usuario)
     {
         for(Usuario us : usuarios)
         {
             if(usuario.getUsuario().trim().equalsIgnoreCase(us.getUsuario().trim()) && 
                usuario.getContrasenia().trim().equalsIgnoreCase(us.getContrasenia().trim()))
-                return true;            
+                return usuario;            
         }
-        return false; 
-    }        
-     
+        return null; 
+    }           
 }

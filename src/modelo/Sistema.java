@@ -9,14 +9,16 @@ public class Sistema {
     
     public Sistema()
     {
-        
+        this.listaAgentes  = new ArrayList<>();
+        this.listaClientes = new ArrayList<>();
+        this.listaPropiedades = new ArrayList<>();
     }
 
     public ArrayList<AgenteVentas> getListaAgentes() {
         return listaAgentes;
     }
 
-    public void setListaAgentes(AgenteVentas agente) {
+    public void agregarAgente(AgenteVentas agente) {
         this.listaAgentes.add(agente);
     }
 
@@ -24,7 +26,7 @@ public class Sistema {
         return listaClientes;
     }
 
-    public void setListaClientes(Cliente cliente) {
+    public void agregarCliente(Cliente cliente) {
         this.listaClientes.add(cliente);
     }
 
