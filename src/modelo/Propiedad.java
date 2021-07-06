@@ -147,6 +147,7 @@ public class Propiedad
                     }
                     i++;
                 }
+                System.out.println("\nEscoger una propiedad: ");
                 op = sc.nextLine();
             }
             while(!ValidatorUtils.validarNumero(op));

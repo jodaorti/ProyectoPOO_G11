@@ -73,47 +73,51 @@ public class ClassUtils {
         Administrador adm = new Administrador( usuario, contrasenia, nombre, cedula,email);
         sistema.getListaAdministradores().add(adm);
         
-        String codigoPropiedad;
+        String codigoPropiedad,descripcion;
         double precio,metrosAncho,profundidad;
         int numPisos,numHabitaciones;
         Ubicacion ubicacion;
         
         //Crear terrenos
         codigoPropiedad = "pr1";
+        descripcion = "Terreno 1";
         precio = 10000;
         metrosAncho = 60;
         profundidad = 10;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Sta Cecilia","norte");
-        Terreno ter1 = new Terreno(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,tipoTerreno.VIVIENDA);
+        Terreno ter1 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.VIVIENDA);
         sistema.agregarPropiedad(ter1);
         
         codigoPropiedad = "pr2";
+        descripcion = "Terreno 2";
         precio = 15000;
         metrosAncho = 80;
         profundidad = 20;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Alborada","norte");
-        Terreno ter2 = new Terreno(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,tipoTerreno.EMPRESARIAL);
+        Terreno ter2 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.EMPRESARIAL);
         sistema.agregarPropiedad(ter2);
         
         //Crear Casas
         codigoPropiedad = "pr3";
+        descripcion = "Casa 1";
         precio = 17000;
         metrosAncho = 70;
         profundidad = 30;        
         ubicacion = new Ubicacion("Pichincha","Quito","cdla. Concordia","norte");
         numPisos = 2;
         numHabitaciones = 3;
-        Casa casa1 = new Casa(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
+        Casa casa1 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
         sistema.agregarPropiedad(casa1);
         
         codigoPropiedad = "pr4";
+        descripcion = "Casa 2";
         precio = 8000;
         metrosAncho = 30;
         profundidad = 30;        
         ubicacion = new Ubicacion("Pichincha","Quito","cdla. Macarena","norte");
         numPisos = 1;
         numHabitaciones = 2;
-        Casa casa2 = new Casa(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
+        Casa casa2 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
         sistema.agregarPropiedad(casa2);
         
         return sistema;

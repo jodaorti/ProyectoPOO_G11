@@ -171,6 +171,7 @@ public class Cliente extends Usuario
                     System.out.println(i+". "+cli);        
                     i++;
                 }
+                System.out.println("Escoger un cliente: ");
                 op = sc.nextLine();
             }
             while(!ValidatorUtils.validarNumero(op));
@@ -180,5 +181,37 @@ public class Cliente extends Usuario
         return clientes.get(opcion);        
     }
     
+    /**
+    * Cargar la información de los clientes y mostrarlas en un listado.     
+     * @param clientes
+     * @param sc
+     * @return 
+    */
+    /*
+    public static void mostrarListadoClientes(ArrayList<Cliente> clientes, Scanner sc)
+    {                        
+        String op = "";
+        int opcion = 0;
+        int i;        
+        do
+        {
+            do 
+            {
+                System.out.println("\n Listado de Clientes");
+                i = 1;
+                for(Cliente cli : clientes)  
+                {
+                    System.out.println(i+". "+cli);        
+                    i++;
+                }
+                op = sc.nextLine();
+            }
+            while(!ValidatorUtils.validarNumero(op));
+            opcion = Integer.parseInt(op) - 1;
+        }
+        while(opcion < 0 || opcion > clientes.size());
+        return clientes.get(opcion);        
+    }
+    */
     
 }
