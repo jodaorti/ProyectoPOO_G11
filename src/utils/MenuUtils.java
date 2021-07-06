@@ -2,7 +2,10 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import modelo.AgenteVentas;
+import modelo.Cliente;
 import modelo.Usuario;
+import tipos.Enum.tipoUsuario;
 
 /**
  * Carga la información de los menus a visualizar. 
@@ -49,7 +52,7 @@ public class MenuUtils {
     /**
     * Muestra el menu de Administrador.
     */
-    public static void generarMenuAdministrador(Scanner sc)
+    public static void generarMenuAdministrador()
     {   
         System.out.println("\n Menu del Administrador");
         System.out.println("1. Registrar Propiedad");
@@ -79,6 +82,25 @@ public class MenuUtils {
         System.out.println("\n Menu del Agente");
         System.out.println("1. Revisar buzón");
         System.out.println("2. Registrar Venta");
-        System.out.println("5. Regresar"); 
+        System.out.println("3. Regresar"); 
     }                
+    
+    /**
+    * Muestra el menu de Administrador, Cliente o Agente dependiendo del usuario.    
+     * @param us
+    */
+    public static void mostrarMenuPorUsuario(Usuario us)
+    {        
+        switch (us.getTipo()) {
+            case CLIENTE:
+                generarMenuCliente();
+                break;
+            case AGENTE:
+                generarMenuAgente();
+                break;
+            default:
+                generarMenuAdministrador();
+                break;
+        }
+    }
 }

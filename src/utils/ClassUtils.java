@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import modelo.Administrador;
 import modelo.AgenteVentas;
 import modelo.Casa;
 import modelo.Cliente;
@@ -37,8 +38,8 @@ public class ClassUtils {
         nombre = "Marina";
         cedula = "1234";
         email  = "marina@gmail.com";
-        AgenteVentas ag1 = new AgenteVentas(usuario,contrasenia,codigoAgente,nombre,cedula,email);
-        sistema.agregarAgente(ag1);
+        AgenteVentas ag1 = new AgenteVentas(usuario,contrasenia,codigoAgente,nombre,cedula,email);        
+        sistema.getListaAgentes().add(ag1);
 
         //Agente 2 
         usuario = "ag2";
@@ -48,7 +49,7 @@ public class ClassUtils {
         cedula = "2222";
         email  = "max@gmail.com";
         AgenteVentas ag2 = new AgenteVentas(usuario,contrasenia,codigoAgente,nombre,cedula,email);
-        sistema.agregarAgente(ag2);
+        sistema.getListaAgentes().add(ag2);
         
         
         // Crear cliente       
@@ -59,7 +60,16 @@ public class ClassUtils {
         email  = "marta@gmail.com";
         fechaNacimiento = StringToDate("2001-04-10");
         Cliente cli1 = new Cliente(usuario, contrasenia, nombre, cedula,email, fechaNacimiento);
-        sistema.agregarCliente(cli1);
+        sistema.getListaClientes().add(cli1);
+        
+        // Crear Administrador       
+        usuario = "adm1";
+        contrasenia = "123";        
+        nombre = "Luis";
+        cedula = "1111";
+        email  = "marta@gmail.com";        
+        Administrador adm = new Administrador( usuario, contrasenia, nombre, cedula,email);
+        sistema.getListaAdministradores().add(adm);
         
         String codigoPropiedad;
         double precio,metrosAncho,profundidad;
@@ -73,7 +83,7 @@ public class ClassUtils {
         profundidad = 10;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Sta Cecilia","norte");
         Terreno ter1 = new Terreno(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,tipoTerreno.VIVIENDA);
-        sistema.setListaPropiedades(ter1);
+        sistema.agregarPropiedad(ter1);
         
         codigoPropiedad = "pr2";
         precio = 15000;
@@ -81,7 +91,7 @@ public class ClassUtils {
         profundidad = 20;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Alborada","norte");
         Terreno ter2 = new Terreno(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,tipoTerreno.EMPRESARIAL);
-        sistema.setListaPropiedades(ter2);
+        sistema.agregarPropiedad(ter2);
         
         //Crear Casas
         codigoPropiedad = "pr3";
@@ -92,7 +102,7 @@ public class ClassUtils {
         numPisos = 2;
         numHabitaciones = 3;
         Casa casa1 = new Casa(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
-        sistema.setListaPropiedades(casa1);
+        sistema.agregarPropiedad(casa1);
         
         codigoPropiedad = "pr4";
         precio = 8000;
@@ -102,7 +112,7 @@ public class ClassUtils {
         numPisos = 1;
         numHabitaciones = 2;
         Casa casa2 = new Casa(codigoPropiedad,precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
-        sistema.setListaPropiedades(casa2);
+        sistema.agregarPropiedad(casa2);
         
         return sistema;
     }        
@@ -127,7 +137,7 @@ public class ClassUtils {
         {
             if(usuario.getUsuario().trim().equalsIgnoreCase(us.getUsuario().trim()) && 
                usuario.getContrasenia().trim().equalsIgnoreCase(us.getContrasenia().trim()))
-                return usuario;            
+                return us;            
         }
         return null; 
     }           

@@ -3,15 +3,17 @@ package modelo;
 import java.util.ArrayList;
 
 public class Sistema {
-    ArrayList<AgenteVentas> listaAgentes;
-    ArrayList<Cliente> listaClientes;
-    ArrayList<Propiedad> listaPropiedades;
+    private ArrayList<AgenteVentas> listaAgentes;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Propiedad> listaPropiedades;
+    private ArrayList<Administrador> listaAdministradores;
     
     public Sistema()
     {
         this.listaAgentes  = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
-        this.listaPropiedades = new ArrayList<>();
+        this.listaAdministradores = new ArrayList<>();
+        this.listaPropiedades = new ArrayList<>();        
     }
 
     public ArrayList<AgenteVentas> getListaAgentes() {
@@ -29,12 +31,20 @@ public class Sistema {
     public void agregarCliente(Cliente cliente) {
         this.listaClientes.add(cliente);
     }
+    
+    public ArrayList<Administrador> getListaAdministradores() {
+        return listaAdministradores;
+    }
+
+    public void agregarAdministrador(Administrador administrador) {
+        this.listaAdministradores.add(administrador);
+    }
 
     public ArrayList<Propiedad> getListaPropiedades() {
         return listaPropiedades;
     }
 
-    public void setListaPropiedades(Propiedad propiedad) {
+    public void agregarPropiedad(Propiedad propiedad) {
         this.listaPropiedades.add(propiedad);
     }            
 }

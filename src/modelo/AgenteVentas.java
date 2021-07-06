@@ -1,5 +1,6 @@
 package modelo;
 import java.util.ArrayList;
+import tipos.Enum.tipoUsuario;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,7 +24,7 @@ public class AgenteVentas extends Usuario{
 
     public AgenteVentas(String usuario, String contrasenia, String codigoAgente,
                         String nombre  ,String cedula,  String correo) {
-        super(usuario, contrasenia);
+        super(usuario, contrasenia,tipoUsuario.AGENTE);
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;

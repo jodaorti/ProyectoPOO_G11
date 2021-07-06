@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import tipos.Enum.tipoUsuario;
 import utils.ClassUtils;
 import utils.ValidatorUtils;
 
@@ -30,7 +31,7 @@ public class Cliente extends Usuario
 
     public Cliente(String usuario, String contrasenia,String nombre,
                    String cedula, String correo, LocalDate fechaNacimiento) {
-        super(usuario, contrasenia);
+        super(usuario, contrasenia,tipoUsuario.CLIENTE);
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;

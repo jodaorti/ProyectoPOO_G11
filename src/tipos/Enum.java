@@ -9,4 +9,10 @@ public class Enum
         EMPRESARIAL
     }
     
+    public enum tipoUsuario
+    {
+        CLIENTE,
+        AGENTE,
+        ADMINISTRADOR
+    }
 }
