@@ -18,8 +18,11 @@ public class AgenteVentas extends Usuario{
     private String cedula;
     private String correo;
     private String codigoAgente;
+    private ArrayList<Venta> ventas;
 
-    public AgenteVentas() {        
+    public AgenteVentas() 
+    {
+        this.ventas = new ArrayList<>();
     }
 
     public AgenteVentas(String usuario, String contrasenia, String codigoAgente,
@@ -63,5 +66,28 @@ public class AgenteVentas extends Usuario{
         this.codigoAgente = codigoAgente;
     }
 
+    public ArrayList<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void agregarVenta(Venta venta) {
+        this.ventas.add(venta);
+    }
+
+    /** Obtener el agente de Ventas del listado.
+     * @param agentes
+     * @param us
+     * @return 
+    */
+    public static AgenteVentas getAgenteVentas(ArrayList<AgenteVentas> agentes, Usuario us)
+    {
+        for(AgenteVentas agente : agentes)
+        {
+            if(us.getUsuario().trim().equalsIgnoreCase(agente.getUsuario().trim()) &&
+               us.getContrasenia().trim().equalsIgnoreCase(agente.getContrasenia().trim()))
+                return agente;
+        }
+        return null;
+    }
     
 }

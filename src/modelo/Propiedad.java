@@ -34,6 +34,55 @@ public class Propiedad
         this.ubicacion = ubicacion;
         this.tipo = tipo;
     }
+
+    public String getCodigoPropiedad() {
+        return codigoPropiedad;
+    }
+
+    public void setCodigoPropiedad(String codigoPropiedad) {
+        this.codigoPropiedad = codigoPropiedad;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getMetrosAncho() {
+        return metrosAncho;
+    }
+
+    public void setMetrosAncho(double metrosAncho) {
+        this.metrosAncho = metrosAncho;
+    }
+
+    public double getProfundidad() {
+        return profundidad;
+    }
+
+    public void setProfundidad(double profundidad) {
+        this.profundidad = profundidad;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public tipoPropiedad getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(tipoPropiedad tipo) {
+        this.tipo = tipo;
+    }
+    
     
     
 }

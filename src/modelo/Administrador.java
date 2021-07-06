@@ -6,6 +6,7 @@
 
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import tipos.Enum;
 import tipos.Enum.tipoTerreno;
@@ -59,7 +60,21 @@ public class Administrador extends Usuario
         this.correo = correo;
     }
     
-    
+     /** Obtener el agente de Ventas del listado.
+     * @param administradores
+     * @param us
+     * @return 
+    */
+    public static Administrador getAdministrador(ArrayList<Administrador> administradores, Usuario us)
+    {
+        for(Administrador administrador : administradores)
+        {
+            if(us.getUsuario().trim().equalsIgnoreCase(administrador.getUsuario().trim()) &&
+               us.getContrasenia().trim().equalsIgnoreCase(administrador.getContrasenia().trim()))
+                return administrador;
+        }
+        return null;
+    }
     
     /**
      * Se registra la propiedad del cliente.

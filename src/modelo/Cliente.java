@@ -70,7 +70,21 @@ public class Cliente extends Usuario
         this.fechaNacimiento = fechaNacimiento;
     }
     
-    
+     /** Obtener el cliente del listado.
+     * @param clientes
+     * @param us
+     * @return 
+    */
+    public static Cliente getCliente(ArrayList<Cliente> clientes, Usuario us)
+    {
+        for(Cliente cliente : clientes)
+        {
+            if(us.getUsuario().trim().equalsIgnoreCase(cliente.getUsuario().trim()) &&
+               us.getContrasenia().trim().equalsIgnoreCase(cliente.getContrasenia().trim()))
+                return cliente;
+        }
+        return null;
+    }
     
     
     

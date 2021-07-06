@@ -19,6 +19,10 @@ public class Main
     static AgenteVentas agenteNuevo;
     static Propiedad propiedadNueva;
     
+    static Cliente clienteActual;
+    static AgenteVentas agenteActual;
+    static Administrador administradorActual;
+    
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);        
@@ -26,11 +30,16 @@ public class Main
         boolean salirSistema = false;
         sistema = new Sistema();
         sistema = ClassUtils.cargarInformacionDefecto();
+        
         ArrayList<Usuario> usuarios = new ArrayList<>();
         Usuario usuarioSistema = null;        
-        clienteNuevo = new Cliente();        
-        agenteNuevo = new AgenteVentas();
-        propiedadNueva = new Propiedad();
+        
+        clienteNuevo        = new Cliente();        
+        agenteNuevo         = new AgenteVentas();
+        propiedadNueva      = new Propiedad();
+        agenteActual        = new AgenteVentas();
+        administradorActual = new Administrador();
+        clienteActual       = new Cliente();
         
         do 
         {   
@@ -49,7 +58,7 @@ public class Main
                     else
                     {
                         MenuUtils.mostrarMenuPorUsuario(usuarioSistema);                        
-                        cargarOpcionesUsuario(usuarioSistema.getTipo(), sc);
+                        cargarOpcionesUsuario(usuarioSistema, sc);
                     }
                     break;
 
@@ -70,9 +79,10 @@ public class Main
         
     }
     
-    public static void cargarOpcionesUsuario(tipoUsuario tipo, Scanner sc)
+    public static void cargarOpcionesUsuario(Usuario usuario, Scanner sc)
     {               
         String op = "";  
+        tipoUsuario tipo = usuario.getTipo();
         switch(tipo)
         {
             case CLIENTE:  
@@ -82,6 +92,7 @@ public class Main
                 }
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && 
                       !op.equalsIgnoreCase("3") && !op.equalsIgnoreCase("4") && !op.equalsIgnoreCase("5"));
+                clienteActual = Cliente.getCliente(sistema.getListaClientes(), usuario);
                 
                 switch(op)
                 {
@@ -104,6 +115,7 @@ public class Main
                     op = sc.nextLine();             
                 }
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && !op.equalsIgnoreCase("3"));
+                agenteActual = AgenteVentas.getAgenteVentas(sistema.getListaAgentes(), usuario);                
                 switch(op)
                 {
                     case "1":
@@ -124,7 +136,7 @@ public class Main
                 }
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && 
                       !op.equalsIgnoreCase("3") && !op.equalsIgnoreCase("4")); 
-                
+                administradorActual = Administrador.getAdministrador(sistema.getListaAdministradores(), usuario);
                 switch(op)
                 {
                     case "1":
