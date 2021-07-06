@@ -1,4 +1,5 @@
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import modelo.Administrador;
@@ -7,6 +8,7 @@ import modelo.Cliente;
 import modelo.Propiedad;
 import modelo.Sistema;
 import modelo.Usuario;
+import modelo.Venta;
 import tipos.Enum.tipoUsuario;
 import utils.ClassUtils;
 import utils.MenuUtils;
@@ -22,6 +24,7 @@ public class Main
     static Cliente clienteActual;
     static AgenteVentas agenteActual;
     static Administrador administradorActual;
+    static Propiedad propiedadActual;
     
     public static void main(String args[])
     {
@@ -40,6 +43,7 @@ public class Main
         agenteActual        = new AgenteVentas();
         administradorActual = new Administrador();
         clienteActual       = new Cliente();
+        propiedadActual     = new Propiedad();
         
         do 
         {   
@@ -97,6 +101,8 @@ public class Main
                 switch(op)
                 {
                     case "1":
+                        
+                        
                         break;
                     case "2":
                         break;
@@ -120,8 +126,16 @@ public class Main
                 {
                     case "1":
                         break;
+                    
                     case "2":
+                        propiedadActual = Propiedad.mostrarListadoPropiedades(sistema.getListaPropiedades(),sc);                        
+                        clienteActual = Cliente.mostrarListadoClientes(sistema.getListaClientes(),sc); 
+                        propiedadActual.setVendida(true);
+                        agenteActual.agregarVenta(new Venta(propiedadActual, clienteActual));                        
+                        System.out.println("Venta agregada correctamente.");
+                        Venta.mostrarListadoVentas(agenteActual.getVentas());
                         break;
+                        
                     case "3":
                         System.out.println("Regresar a menu principal");
                         break;                                          

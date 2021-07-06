@@ -69,6 +69,13 @@ public class Cliente extends Usuario
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre ;
+    }
+    
+    
     
      /** Obtener el cliente del listado.
      * @param clientes
@@ -84,9 +91,7 @@ public class Cliente extends Usuario
                 return cliente;
         }
         return null;
-    }
-    
-    
+    }        
     
     /*
     Muestra al cliente las propiedades en venta con o sin filtros de precio,tipo,ciudad o sector aplicados
@@ -143,4 +148,37 @@ public class Cliente extends Usuario
         }        
         return new Cliente(usuario,contrasenia, nombre, cedula, correo, fechaNac);
     }
+    
+    /**
+    * Cargar la información de los clientes y mostrarlas en un listado.     
+     * @param clientes
+     * @param sc
+     * @return 
+    */
+    public static Cliente mostrarListadoClientes(ArrayList<Cliente> clientes, Scanner sc)
+    {                        
+        String op = "";
+        int opcion = 0;
+        int i;        
+        do
+        {
+            do 
+            {
+                System.out.println("\n Listado de Clientes");
+                i = 1;
+                for(Cliente cli : clientes)  
+                {
+                    System.out.println(i+". "+cli);        
+                    i++;
+                }
+                op = sc.nextLine();
+            }
+            while(!ValidatorUtils.validarNumero(op));
+            opcion = Integer.parseInt(op) - 1;
+        }
+        while(opcion < 0 || opcion > clientes.size());
+        return clientes.get(opcion);        
+    }
+    
+    
 }

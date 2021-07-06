@@ -83,7 +83,7 @@ public class Administrador extends Usuario
      */
     public static Propiedad registrarPropiedad(Scanner sc){
         System.out.println("\n Registro de Propiedad");        
-        String op,tipoPropiedad,codigoPropiedad,prc,mts,prf,provincia,
+        String op,tipoPropiedad,codigoPropiedad,descripcion, prc,mts,prf,provincia,
                ciudad,direccion,sector,numP,numH = "";
         
         double precio,metros,profundidad = 0;
@@ -101,6 +101,8 @@ public class Administrador extends Usuario
             codigoPropiedad = sc.nextLine();
         }
         while(codigoPropiedad.trim().isEmpty());        
+        System.out.println("Descripción: ");
+        descripcion = sc.nextLine();        
         do
         {
             System.out.println("Precio: ");
@@ -157,7 +159,7 @@ public class Administrador extends Usuario
                     tipoterreno = tipoTerreno.EMPRESARIAL;
                     break;                                       
             }
-            return new Terreno(codigoPropiedad,precio,metros,profundidad,ubicacion,tipoterreno);                                        
+            return new Terreno(codigoPropiedad,descripcion, precio,metros,profundidad,ubicacion,tipoterreno);                                        
         }                            
         //Casa
         else
@@ -177,7 +179,7 @@ public class Administrador extends Usuario
             }
             while(!ValidatorUtils.validarNumero(numH));
             numHab = Integer.parseInt(numH);
-            return new Casa(codigoPropiedad, precio, metros, profundidad, ubicacion,numPisos,numHab);                                        
+            return new Casa(codigoPropiedad,descripcion, precio, metros, profundidad, ubicacion,numPisos,numHab);                                        
         }         
     }
     

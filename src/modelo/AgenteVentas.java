@@ -1,4 +1,5 @@
 package modelo;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import tipos.Enum.tipoUsuario;
 
@@ -32,6 +33,7 @@ public class AgenteVentas extends Usuario{
         this.cedula = cedula;
         this.correo = correo;
         this.codigoAgente = codigoAgente;
+        this.ventas = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -89,5 +91,16 @@ public class AgenteVentas extends Usuario{
         }
         return null;
     }
+    
+    /** Crear una venta del agente con un cliente.
+     * @param propiedad
+     * @param cliente          
+     * @return 
+    */
+    public static Venta registrarVenta(Propiedad propiedad, Cliente cliente)
+    {               
+        return new Venta(propiedad, cliente);        
+    }
+    
     
 }

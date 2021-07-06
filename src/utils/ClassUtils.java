@@ -1,7 +1,9 @@
 package utils;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import modelo.Administrador;
@@ -123,6 +125,12 @@ public class ClassUtils {
         return LocalDate.parse(fecha, pattern);        
     }
     
+    //Permite convertir la fecha de tipo Date a String para ser guardada en el archivo
+    public static String dateTimeToString(LocalDateTime fecha)
+    {
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return fecha.format(formatter);                       
+    }
     
     /**
     * Ingresa los datos del usuario a verificar, si es asi devuelve true caso contrario false
