@@ -6,8 +6,11 @@
 
 package modelo;
 
+import java.util.Scanner;
 import tipos.Enum;
+import tipos.Enum.tipoTerreno;
 import tipos.Enum.tipoUsuario;
+import utils.ValidatorUtils;
 
 /**
  * 
@@ -59,20 +62,136 @@ public class Administrador extends Usuario
     
     
     /**
-     * Se registra la propiedad del cliente
+     * Se registra la propiedad del cliente.
+     * @param sc
+     * @return 
      */
-    public void registrarPropiedad(){
+    public static Propiedad registrarPropiedad(Scanner sc){
+        System.out.println("\n Registro de Propiedad");        
+        String op,tipoPropiedad,codigoPropiedad,prc,mts,prf,provincia,
+               ciudad,direccion,sector,numP,numH = "";
         
+        double precio,metros,profundidad = 0;
+        int numPisos,numHab = 0;
+        
+        do 
+        {
+            System.out.println("\nSeleccione Terreno(1) o Casa(2): ");
+            op = sc.nextLine();
+        }
+        while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2"));
+        do
+        {
+            System.out.println("Código de Propiedad: ");
+            codigoPropiedad = sc.nextLine();
+        }
+        while(codigoPropiedad.trim().isEmpty());        
+        do
+        {
+            System.out.println("Precio: ");
+            prc = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(prc));
+        precio = Double.parseDouble(prc);
+        do
+        {
+            System.out.println("Metros de ancho: ");
+            mts = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(mts));
+        metros = Double.parseDouble(mts);
+        do
+        {
+            System.out.println("Profundidad: ");
+            prf = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(prf));
+        profundidad = Double.parseDouble(prf);
+        
+        System.out.println("Provincia: ");
+        provincia = sc.nextLine();
+        System.out.println("Ciudad: ");
+        ciudad = sc.nextLine();
+        System.out.println("Dirección: ");        
+        direccion = sc.nextLine();
+        System.out.println("Sector: ");
+        sector = sc.nextLine();
+        Ubicacion ubicacion = new Ubicacion(provincia, ciudad, direccion, sector);
+        
+        //Terreno
+        if(op.equalsIgnoreCase("1"))
+        {
+            do 
+            {
+                System.out.println("\nSeleccione tipo de Terreno COMERCIAL(1), VIVIENDA(2), EMPRESARIAL(3): ");
+                op = sc.nextLine();
+            }
+            while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && !op.equalsIgnoreCase("3"));
+            tipoTerreno tipoterreno;
+            switch(op)
+            {
+                case "1":
+                    tipoterreno = tipoTerreno.COMERCIAL;
+                    break;
+                
+                case "2":
+                    tipoterreno = tipoTerreno.VIVIENDA;
+                    break;
+                
+                default:
+                    tipoterreno = tipoTerreno.EMPRESARIAL;
+                    break;                                       
+            }
+            return new Terreno(codigoPropiedad,precio,metros,profundidad,ubicacion,tipoterreno);                                        
+        }                            
+        //Casa
+        else
+        {
+            do
+            {
+                System.out.println("Número de Pisos: ");
+                numP = sc.nextLine();
+            }
+            while(!ValidatorUtils.validarNumero(numP));
+            numPisos = Integer.parseInt(numP);
+            
+            do
+            {
+                System.out.println("Número de Habitaciones: ");
+                numH = sc.nextLine();
+            }
+            while(!ValidatorUtils.validarNumero(numH));
+            numHab = Integer.parseInt(numH);
+            return new Casa(codigoPropiedad, precio, metros, profundidad, ubicacion,numPisos,numHab);                                        
+        }         
     }
+    
     /**
      * Se registra el agente con el cual se hará la venta
-     * @param nombre
-     * @param cedula
-     * @param correo 
-     */
-    public void registrarAgente(String nombre,String cedula,String correo){
+     * @param sc     
+     * @return  
+     */        
+    public static AgenteVentas registrarAgente(Scanner sc)
+    {
+        System.out.println("\n Registro de Agente");
+                          
+        String usuario,contrasenia,codigoAgente,nombre,cedula,correo = "";  
         
+        System.out.println("\nUsuario: ");
+        usuario = sc.nextLine();
+        System.out.println("Contraseña: ");
+        contrasenia = sc.nextLine();
+        System.out.println("Codigo Agente: ");
+        codigoAgente = sc.nextLine();
+        System.out.println("Nombre: ");
+        nombre = sc.nextLine();
+        System.out.println("Cedula: ");
+        cedula = sc.nextLine();
+        System.out.println("Correo: ");
+        correo = sc.nextLine();                        
+        return new AgenteVentas(usuario, contrasenia,codigoAgente, nombre, cedula, correo);
     }
+    
     /**
      * Se genera un reporte actualizado con las ventas y su debido contacto con el agente
      * @param finicio

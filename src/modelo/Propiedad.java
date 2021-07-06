@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import tipos.Enum.tipoPropiedad;
+
 /**
  *
  * @author dell
@@ -16,18 +18,21 @@ public class Propiedad
     private double metrosAncho;
     private double profundidad;
     private Ubicacion ubicacion;    
+    private tipoPropiedad tipo;
     
     public Propiedad()
     {
         
     }
 
-    public Propiedad(String codigoPropiedad, double precio, double metrosAncho, double profundidad, Ubicacion ubicacion) {
+    public Propiedad(String codigoPropiedad, double precio, double metrosAncho, double profundidad,
+                     Ubicacion ubicacion, tipoPropiedad tipo) {
         this.codigoPropiedad = codigoPropiedad;
         this.precio = precio;
         this.metrosAncho = metrosAncho;
         this.profundidad = profundidad;
         this.ubicacion = ubicacion;
+        this.tipo = tipo;
     }
     
     

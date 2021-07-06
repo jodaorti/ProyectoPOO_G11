@@ -2,6 +2,12 @@ package tipos;
 
 public class Enum 
 {
+    public enum tipoPropiedad
+    {
+        TERRENO,
+        CASA
+    }
+    
     public enum tipoTerreno
     {
         COMERCIAL,

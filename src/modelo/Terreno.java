@@ -1,5 +1,6 @@
 package modelo;
 
+import tipos.Enum.tipoPropiedad;
 import tipos.Enum.tipoTerreno;
 
 public class Terreno extends Propiedad
@@ -13,7 +14,7 @@ public class Terreno extends Propiedad
 
     public Terreno(String codigoPropiedad, double precio, double metrosAncho, 
                    double profundidad, Ubicacion ubicacion, tipoTerreno tipoT) {
-        super(codigoPropiedad, precio, metrosAncho, profundidad, ubicacion);
+        super(codigoPropiedad, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.TERRENO);
         this.tipoT = tipoT;
     }
 

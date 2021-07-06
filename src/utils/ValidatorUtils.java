@@ -21,13 +21,7 @@ public class ValidatorUtils {
         anio = fechaPart[0];
         mes  = fechaPart[1];
         dia  = fechaPart[2];     
-        
-        boolean a,m,d = false;
-        
-        a = validarNumero(anio);
-        m = validarNumero(mes);
-        d = validarNumero(dia);
-        
+                
         return validarNumero(anio) && validarNumero(mes) && validarNumero(dia);                   
     }
     

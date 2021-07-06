@@ -1,7 +1,10 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import modelo.Administrador;
+import modelo.AgenteVentas;
 import modelo.Cliente;
+import modelo.Propiedad;
 import modelo.Sistema;
 import modelo.Usuario;
 import tipos.Enum.tipoUsuario;
@@ -9,17 +12,25 @@ import utils.ClassUtils;
 import utils.MenuUtils;
 
 
-public class Main {
+public class Main 
+{
+    static Sistema sistema;
+    static Cliente clienteNuevo;
+    static AgenteVentas agenteNuevo;
+    static Propiedad propiedadNueva;
+    
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);        
         int opcion = 0;
         boolean salirSistema = false;
-        Sistema sistema = new Sistema();
+        sistema = new Sistema();
         sistema = ClassUtils.cargarInformacionDefecto();
         ArrayList<Usuario> usuarios = new ArrayList<>();
         Usuario usuarioSistema = null;        
-        Cliente clienteNuevo = new Cliente();
+        clienteNuevo = new Cliente();        
+        agenteNuevo = new AgenteVentas();
+        propiedadNueva = new Propiedad();
         
         do 
         {   
@@ -36,9 +47,10 @@ public class Main {
                     if(usuarioSistema == null)                  
                         System.out.println("El usuario no esta registrado\n\n");   
                     else
+                    {
                         MenuUtils.mostrarMenuPorUsuario(usuarioSistema);                        
                         cargarOpcionesUsuario(usuarioSistema.getTipo(), sc);
-                    
+                    }
                     break;
 
                 case 2:
@@ -71,20 +83,67 @@ public class Main {
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && 
                       !op.equalsIgnoreCase("3") && !op.equalsIgnoreCase("4") && !op.equalsIgnoreCase("5"));
                 
+                switch(op)
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        System.out.println("Regresar a menu principal");
+                        break;                        
+                }
+                                                
             case AGENTE:    
                 do 
                 {                    
                     op = sc.nextLine();             
                 }
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && !op.equalsIgnoreCase("3"));
+                switch(op)
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        System.out.println("Regresar a menu principal");
+                        break;                                          
+                }
+                
             
+            //Administrador
             default:
                 do 
                 {                    
                     op = sc.nextLine();             
                 }
                 while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && 
-                      !op.equalsIgnoreCase("3") && !op.equalsIgnoreCase("4"));                        
+                      !op.equalsIgnoreCase("3") && !op.equalsIgnoreCase("4")); 
+                
+                switch(op)
+                {
+                    case "1":
+                        propiedadNueva = Administrador.registrarPropiedad(sc);
+                        sistema.agregarPropiedad(propiedadNueva);                        
+                        break;
+                        
+                    case "2":
+                        agenteNuevo = Administrador.registrarAgente(sc);
+                        sistema.agregarAgente(agenteNuevo);                                                
+                        break;
+                        
+                    case "3":
+                        
+                        break;
+                    case "4":
+                        System.out.println("Regresar a menu principal");
+                        break;                    
+                }
         }
     }
 }

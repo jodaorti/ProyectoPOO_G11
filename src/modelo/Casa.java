@@ -1,5 +1,7 @@
 package modelo;
 
+import tipos.Enum.tipoPropiedad;
+
 public class Casa extends Propiedad
 {
     private int numPisos;
@@ -12,7 +14,7 @@ public class Casa extends Propiedad
 
     public Casa(String codigoPropiedad, double precio, double metrosAncho, 
                 double profundidad, Ubicacion ubicacion, int numPisos, int numHabitaciones) {
-        super(codigoPropiedad, precio, metrosAncho, profundidad, ubicacion);
+        super(codigoPropiedad, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.CASA);
         this.numPisos = numPisos;
         this.numHabitaciones = numHabitaciones;
     }
