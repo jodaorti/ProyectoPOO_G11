@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import tipos.Enum.tipoPropiedad;
 import tipos.Enum.tipoUsuario;
 import utils.ClassUtils;
 import utils.ValidatorUtils;
@@ -181,37 +182,101 @@ public class Cliente extends Usuario
         return clientes.get(opcion);        
     }
     
-    /**
-    * Cargar la información de los clientes y mostrarlas en un listado.     
-     * @param clientes
+     /**
+     * Se genera un reporte con las propiedades a la venta mediante filtros     
+     * @param cliente
+     * @param propiedades
      * @param sc
      * @return 
-    */
-    /*
-    public static void mostrarListadoClientes(ArrayList<Cliente> clientes, Scanner sc)
-    {                        
-        String op = "";
-        int opcion = 0;
-        int i;        
+     */
+    public static Consulta consultaPropiedades(Cliente cliente,ArrayList<Propiedad> propiedades,Scanner sc)
+    {
+        System.out.println("\n Consulta de Propiedades ");        
+        String tipo,rangoPrecio,ciudad,sector;
+        tipoPropiedad tipoP;
         do
         {
-            do 
-            {
-                System.out.println("\n Listado de Clientes");
-                i = 1;
-                for(Cliente cli : clientes)  
-                {
-                    System.out.println(i+". "+cli);        
-                    i++;
-                }
-                op = sc.nextLine();
-            }
-            while(!ValidatorUtils.validarNumero(op));
-            opcion = Integer.parseInt(op) - 1;
+            System.out.println("Tipo (1)Terreno, (2)Casa: ");
+            tipo = sc.nextLine();            
         }
-        while(opcion < 0 || opcion > clientes.size());
-        return clientes.get(opcion);        
+        while(!tipo.equalsIgnoreCase("1") && !tipo.equalsIgnoreCase("2") && !tipo.equalsIgnoreCase(""));                                
+        do
+        {
+            System.out.println("Rango Precio (xxxxx-xxxxx)");
+            rangoPrecio = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarRangoPrecios(rangoPrecio));        
+        String[] precioPart = rangoPrecio.split("-");
+        String precioD = precioPart[0];
+        String precioH = precioPart[1];
+        
+        System.out.println("Ciudad: ");
+        ciudad = sc.nextLine();
+        
+        System.out.println("Sector: ");
+        sector = sc.nextLine();
+        
+        if(tipo.equalsIgnoreCase("1"))
+            tipoP = tipoPropiedad.TERRENO;
+        else
+            tipoP = tipoPropiedad.CASA;
+        
+        ArrayList<Propiedad> propiedadesFiltradas = Propiedad.getListaPropiedadesFiltradas(
+                                                    propiedades,tipoP,Double.parseDouble(precioD),
+                                                    Double.parseDouble(precioH),ciudad, sector);
+        
+        if(propiedadesFiltradas.isEmpty())
+        {
+            System.out.println("No exsten datos que mostrar\n");
+            return null;
+        }
+        
+        System.out.println("Lista de Propiedades Consultadas");
+        String format = " %1$-10s %2$-20s %3$-10s %4$-10s %5$-50s %6$-5s\n";
+        System.out.format(format,"código","descripción","precio","Tamaño","ubicación","consultada");
+        
+        for(Propiedad propiedad : propiedadesFiltradas)
+        {
+            System.out.format(format,propiedad.getCodigoPropiedad(),
+                                     propiedad.getDescripcion(),
+                                     propiedad.getPrecio(),
+                                     propiedad.getMetrosAncho()*propiedad.getProfundidad()+"M2",
+                                     propiedad.getUbicacion().toString(),
+                                     propiedad.isConsultada() ? "SI" :"NO");
+        }
+        
+        String codigo = "";        
+        System.out.println("\nIngrese el código de la propiedad desea mas detalle (o vacío para regresar):");
+        codigo = sc.nextLine();    
+        
+        if(!codigo.trim().isEmpty())
+        {
+            Propiedad propConsulta = Propiedad.getPropiedadPorListado(propiedadesFiltradas, codigo);
+            if(propConsulta == null)
+                System.out.println("No existe propiedad con ese código");
+            else
+            {
+                System.out.println("Detalles de la propiedad:");
+                System.out.println(propConsulta);
+            }
+            
+            String consultaSolicitada = "";                
+            do
+            {
+                System.out.println("\nDesea realizar consulta (si/no):");
+                consultaSolicitada = sc.nextLine();
+            }
+            while(!consultaSolicitada.equalsIgnoreCase("SI") && !consultaSolicitada.equalsIgnoreCase("NO"));
+            if(consultaSolicitada.equalsIgnoreCase("SI"))
+            {
+                String comentario = "";
+                System.out.println("\nIngrese su consulta:");                
+                comentario = sc.nextLine();
+                if(!comentario.trim().isEmpty())                
+                    return new Consulta(cliente, propConsulta,comentario);                
+            }
+            return null;
+        }
+        return null;
     }
-    */
-    
 }

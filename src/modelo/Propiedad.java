@@ -24,6 +24,7 @@ public class Propiedad
     private Ubicacion ubicacion;    
     private tipoPropiedad tipo;
     private boolean vendida;
+    private boolean consultada;
     
     public Propiedad()
     {
@@ -40,6 +41,7 @@ public class Propiedad
         this.ubicacion = ubicacion;
         this.tipo = tipo;
         this.vendida = false;
+        this.consultada = false;
     }
 
     public String getCodigoPropiedad() {
@@ -106,6 +108,14 @@ public class Propiedad
         this.vendida = vendida;
     }
     
+     public boolean isConsultada() {
+        return consultada;
+    }
+
+    public void setConsultada(boolean consultada) {
+        this.consultada = consultada;
+    }
+    
     
 
     @Override
@@ -157,4 +167,97 @@ public class Propiedad
         return propiedades.get(opcion);        
     }
     
+    /**
+    * Cargar las  propiedades basados en los filtros               
+     * @param propiedades
+     * @param tipo
+     * @param precioDesde
+     * @param precioHasta
+     * @param sector
+     * @param ciudad
+     * @return           
+    */
+    public static ArrayList<Propiedad> getListaPropiedadesFiltradas(ArrayList<Propiedad> propiedades, 
+                                                      tipoPropiedad tipo,double precioDesde, 
+                                                      double precioHasta, String ciudad, String sector)
+    {
+        //Filtro Tipo
+        ArrayList<Propiedad> propiedadesFiltroTipo = new ArrayList<>();
+        
+        //Filtro PrecioDesde - PrecioHasta
+        ArrayList<Propiedad> propiedadesFiltroPrecio = new ArrayList<>();
+        
+        //Filtro Ciudad         
+        ArrayList<Propiedad> propiedadesFiltroCiudad = new ArrayList<>();
+        
+        //Filtro Sector         
+        ArrayList<Propiedad> propiedadesFiltroSector = new ArrayList<>();
+        
+        //Filtro Tipo
+        for(Propiedad propiedad : propiedades)                  
+        {
+            if(propiedad.getTipo() == tipo && !propiedad.isVendida())
+                propiedadesFiltroTipo.add(propiedad);                
+        }
+        
+        //Filtro Precio
+        for(Propiedad propiedad : propiedadesFiltroTipo)                  
+        {
+            if(propiedad.getPrecio() >= precioDesde && propiedad.getPrecio() <= precioHasta)
+                propiedadesFiltroPrecio.add(propiedad);                
+        }
+        
+        //Filtro Ciudad 
+        if(!ciudad.trim().isEmpty())
+        {            
+            for(Propiedad propiedad : propiedadesFiltroPrecio)                  
+            {
+                if(propiedad.getUbicacion().getCiudad().equalsIgnoreCase(ciudad))
+                    propiedadesFiltroCiudad.add(propiedad);                
+            }
+        }
+        else           
+            propiedadesFiltroCiudad.addAll(propiedadesFiltroPrecio);
+        
+        //Filtro Sector 
+        if(!sector.trim().isEmpty())
+        {            
+            for(Propiedad propiedad : propiedadesFiltroCiudad)                  
+            {
+                if(propiedad.getUbicacion().getCiudad().equalsIgnoreCase(ciudad))
+                    propiedadesFiltroSector.add(propiedad);                
+            }
+        }
+        else           
+            propiedadesFiltroSector.addAll(propiedadesFiltroCiudad);        
+        return propiedadesFiltroSector;
+    }
+    
+    /**
+    * Cargar las  propiedades del listado                         
+     * @param propiedades
+     * @param codigoPropiedad
+     * @return 
+    */
+    public static Propiedad getPropiedadPorListado(ArrayList<Propiedad> propiedades, String codigoPropiedad)
+    {
+        for(Propiedad prop : propiedades)
+        {
+            if(prop.getCodigoPropiedad().trim().equalsIgnoreCase(codigoPropiedad))
+                return prop;
+        }
+        return null;
+    }
+    
+    public static int getPropiedadIndice(ArrayList<Propiedad> propiedades,String codigo)
+    {
+        int i = 0;
+        for(Propiedad propiedad : propiedades)
+        {            
+            if(propiedad.getCodigoPropiedad().equalsIgnoreCase(codigo))
+                return i;
+            i++;
+        }
+        return -1;
+    }
 }

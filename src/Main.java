@@ -5,6 +5,7 @@ import java.util.Scanner;
 import modelo.Administrador;
 import modelo.AgenteVentas;
 import modelo.Cliente;
+import modelo.Consulta;
 import modelo.Propiedad;
 import modelo.Sistema;
 import modelo.Usuario;
@@ -20,11 +21,13 @@ public class Main
     static Cliente clienteNuevo;
     static AgenteVentas agenteNuevo;
     static Propiedad propiedadNueva;
+    static Consulta consultaNueva;
     
     static Cliente clienteActual;
     static AgenteVentas agenteActual;
     static Administrador administradorActual;
     static Propiedad propiedadActual;
+    
     
     public static void main(String args[])
     {
@@ -45,10 +48,12 @@ public class Main
         clienteNuevo           = new Cliente();        
         agenteNuevo            = new AgenteVentas();
         propiedadNueva         = new Propiedad();
+        consultaNueva          = new Consulta();
+        
         agenteActual           = new AgenteVentas();
         administradorActual    = new Administrador();
         clienteActual          = new Cliente();
-        propiedadActual        = new Propiedad();
+        propiedadActual        = new Propiedad();        
         
         while(!salirSistema)
         {
@@ -107,9 +112,20 @@ public class Main
                     switch(opcion)
                     {
                         case "1":
-
-
+                            consultaNueva = Cliente.consultaPropiedades(clienteActual,sistema.getListaPropiedades(), sc);
+                            if(consultaNueva != null)
+                            {
+                                int i = Propiedad.getPropiedadIndice(sistema.getListaPropiedades(),consultaNueva.getPropiedad().getCodigoPropiedad());
+                                if(i != -1)
+                                {
+                                    sistema.getListaPropiedades().get(i).setConsultada(true);
+                                    sistema.agregarConsulta(consultaNueva);
+                                }
+                                
+                            }
+                            
                             break;
+                            
                         case "2":
                             break;
                         case "3":
@@ -174,19 +190,23 @@ public class Main
                     
                     switch(opcion)
                     {
+                        //Registrar Propiedad
                         case "1":
                             propiedadNueva = Administrador.registrarPropiedad(sc);
                             sistema.agregarPropiedad(propiedadNueva);                        
                             break;
 
+                        //Registrar Agente
                         case "2":
                             agenteNuevo = Administrador.registrarAgente(sc);
                             sistema.agregarAgente(agenteNuevo);                                                
                             break;
 
+                        //Reporte Contactos y Ventas
                         case "3":
-
+                            Administrador.reporteContactoyVentas(sistema.getListaAgentes(), sc);
                             break;
+                            
                         case "4":
                             System.out.println("\nRegresando...\n");
                             salirAdministrador = true;

@@ -49,6 +49,11 @@ public class Ubicacion {
     public void setSector(String sector) {
         this.sector = sector;
     }
+
+    @Override
+    public String toString() {
+        return provincia.trim()+", "+ciudad.trim()+", "+direccion.trim()+", "+sector.trim();
+    }
     
     
 }

@@ -6,11 +6,14 @@
 
 package modelo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import tipos.Enum;
 import tipos.Enum.tipoTerreno;
 import tipos.Enum.tipoUsuario;
+import utils.ClassUtils;
 import utils.ValidatorUtils;
 
 /**
@@ -214,110 +217,50 @@ public class Administrador extends Usuario
      * @param agentes     
      * @param sc     
      */
-    
-    /*
-    public static void reporteContactoyVentas(ArrayList<AgenteVentas> agentes,Scanner sc){
+    public static boolean reporteContactoyVentas(ArrayList<AgenteVentas> agentes,Scanner sc){
         System.out.println("\n Reporte Contactos y Ventas ");        
-        String op,tipoPropiedad,codigoPropiedad,descripcion, prc,mts,prf,provincia,
-               ciudad,direccion,sector,numP,numH = "";
         
-        double precio,metros,profundidad = 0;
-        int numPisos,numHab = 0;
-        
-        do 
-        {
-            System.out.println("\nSeleccione Terreno(1) o Casa(2): ");
-            op = sc.nextLine();
-        }
-        while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2"));
+        String rangoFecha = "";
         do
         {
-            System.out.println("Código de Propiedad: ");
-            codigoPropiedad = sc.nextLine();
+            System.out.println("Ingrese Rango Fechas (dd/MM/YYYY-dd/MM/YYYY)");
+            rangoFecha = sc.nextLine();
         }
-        while(codigoPropiedad.trim().isEmpty());        
-        System.out.println("Descripción: ");
-        descripcion = sc.nextLine();        
-        do
-        {
-            System.out.println("Precio: ");
-            prc = sc.nextLine();
-        }
-        while(!ValidatorUtils.validarNumero(prc));
-        precio = Double.parseDouble(prc);
-        do
-        {
-            System.out.println("Metros de ancho: ");
-            mts = sc.nextLine();
-        }
-        while(!ValidatorUtils.validarNumero(mts));
-        metros = Double.parseDouble(mts);
-        do
-        {
-            System.out.println("Profundidad: ");
-            prf = sc.nextLine();
-        }
-        while(!ValidatorUtils.validarNumero(prf));
-        profundidad = Double.parseDouble(prf);
+        while(!ValidatorUtils.validarRangoFechas(rangoFecha));
+        String[] fechaPart = rangoFecha.split("-");
+        String fechaD = fechaPart[0];
+        String fechaH = fechaPart[1];
+        ArrayList<Venta> ventas = new ArrayList<>();
+        for(AgenteVentas agente : agentes)     
+            ventas.addAll(agente.getVentas());        
         
-        System.out.println("Provincia: ");
-        provincia = sc.nextLine();
-        System.out.println("Ciudad: ");
-        ciudad = sc.nextLine();
-        System.out.println("Dirección: ");        
-        direccion = sc.nextLine();
-        System.out.println("Sector: ");
-        sector = sc.nextLine();
-        Ubicacion ubicacion = new Ubicacion(provincia, ciudad, direccion, sector);
-        
-        //Terreno
-        if(op.equalsIgnoreCase("1"))
+        LocalDateTime fechaDesde = ClassUtils.StringToDateTime(fechaD);
+        LocalDateTime fechaHasta = ClassUtils.StringToDateTime(fechaH);
+                    
+        String format = " %1$-2s %2$-4s %3$-10s\n";
+        System.out.format(format,"Agente","Numero Ventas","Numero de Respuestas");
+        for(AgenteVentas agente : agentes)
         {
-            do 
-            {
-                System.out.println("\nSeleccione tipo de Terreno COMERCIAL(1), VIVIENDA(2), EMPRESARIAL(3): ");
-                op = sc.nextLine();
-            }
-            while(!op.equalsIgnoreCase("1") && !op.equalsIgnoreCase("2") && !op.equalsIgnoreCase("3"));
-            tipoTerreno tipoterreno;
-            switch(op)
-            {
-                case "1":
-                    tipoterreno = tipoTerreno.COMERCIAL;
-                    break;
-                
-                case "2":
-                    tipoterreno = tipoTerreno.VIVIENDA;
-                    break;
-                
-                default:
-                    tipoterreno = tipoTerreno.EMPRESARIAL;
-                    break;                                       
-            }
-            //return new Terreno(codigoPropiedad,descripcion, precio,metros,profundidad,ubicacion,tipoterreno);                                        
-            return new Terreno(codigoPropiedad, descripcion, precio, metros, profundidad, ubicacion, tipoterreno);
-        }                            
-        //Casa
+            int numVentas = Venta.getCantidadVentasAgenteFiltrada(agente.getVentas(), fechaDesde, fechaHasta);
+            System.out.format(format,agente.getCodigoAgente(),numVentas,0);
+        }    
+        
+        String op = "";
+        
+        System.out.println("Ingrese código del agente quiere mas detalles o vacio  para regresar:");
+        op = sc.nextLine();
+        if(op.equalsIgnoreCase(""))
+            return true;
         else
         {
-            do
-            {
-                System.out.println("Número de Pisos: ");
-                numP = sc.nextLine();
-            }
-            while(!ValidatorUtils.validarNumero(numP));
-            numPisos = Integer.parseInt(numP);
+            ArrayList<Consulta> consultasPorAgente = new ArrayList<>();
             
-            do
+            for(Consulta consulta : consultasPorAgente)
             {
-                System.out.println("Número de Habitaciones: ");
-                numH = sc.nextLine();
+                
             }
-            while(!ValidatorUtils.validarNumero(numH));
-            numHab = Integer.parseInt(numH);
-            return new Casa(codigoPropiedad,descripcion, precio, metros, profundidad, ubicacion,numPisos,numHab);                                        
-        } 
+        }
+        return false;
     }
-    */
-
+   
 }

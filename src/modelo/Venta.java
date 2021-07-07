@@ -50,9 +50,7 @@ public class Venta {
     public String toString() {
         return "Propiedad: "+propiedad.getCodigoPropiedad()+" Cliente: "+cliente.getNombre()+" Fecha: "+ClassUtils.dateTimeToString(fechaVenta);
     }
-    
-    
-    
+            
     /**
     * Cargar la información de las ventas y mostrarlas en un listado.     
      * @param ventas          
@@ -70,5 +68,26 @@ public class Venta {
                                        "Fecha: "+ClassUtils.dateTimeToString(venta.fechaVenta));                                               
             i++;
         }                
+    }
+    
+    /**
+    * Cargar las  ventas basadas en el rango de fechas
+     * @param ventas          
+     * @param fechaDesde          
+     * @param fechaHasta          
+     * @return           
+    */
+    public static int getCantidadVentasAgenteFiltrada(ArrayList<Venta> ventas, 
+                                                      LocalDateTime fechaDesde, 
+                                                      LocalDateTime fechaHasta)
+    {
+        int numVentas = 0;        
+        for(Venta venta : ventas)
+        {
+            if (venta.getFechaVenta().isBefore(fechaDesde)
+                    && venta.getFechaVenta().isAfter(fechaDesde))             
+               numVentas++;                                              
+        }
+        return numVentas;
     }
 }

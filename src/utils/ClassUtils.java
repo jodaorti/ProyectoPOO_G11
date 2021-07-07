@@ -60,7 +60,7 @@ public class ClassUtils {
         nombre = "Marta";
         cedula = "1111";
         email  = "marta@gmail.com";
-        fechaNacimiento = StringToDate("2001-04-10");
+        fechaNacimiento = StringToDate("10/04/2001");
         Cliente cli1 = new Cliente(usuario, contrasenia, nombre, cedula,email, fechaNacimiento);
         sistema.getListaClientes().add(cli1);
         
@@ -123,16 +123,36 @@ public class ClassUtils {
         return sistema;
     }        
     
+    /**
+    * Permite convertir la fecha de tipo String a LocalDate.               
+     * @param fecha
+     * @return 
+    */
     public static LocalDate StringToDate(String fecha)
     {               
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(fecha, pattern);        
     }
     
-    //Permite convertir la fecha de tipo Date a String para ser guardada en el archivo
+    /**
+    * Permite convertir la fecha de tipo String a LocalDateTime.               
+     * @param fecha
+     * @return 
+    */
+    public static LocalDateTime StringToDateTime(String fecha)
+    {               
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return LocalDateTime.parse(fecha, pattern);        
+    }        
+    
+    /**
+    * Permite convertir la fecha de tipo Date a String para ser guardada en el archivo..               
+     * @param fecha
+     * @return 
+    */
     public static String dateTimeToString(LocalDateTime fecha)
     {
-        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return fecha.format(formatter);                       
     }
     
