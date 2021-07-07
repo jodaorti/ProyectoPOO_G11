@@ -118,7 +118,8 @@ public class Main
                                 int i = Propiedad.getPropiedadIndice(sistema.getListaPropiedades(),consultaNueva.getPropiedad().getCodigoPropiedad());
                                 if(i != -1)
                                 {
-                                    sistema.getListaPropiedades().get(i).setConsultada(true);
+                                    consultaNueva.setPregunta(true);
+                                    sistema.getListaPropiedades().get(i).setConsultada(true);                                    
                                     sistema.agregarConsulta(consultaNueva);
                                 }
                                 
@@ -132,6 +133,7 @@ public class Main
                                 int i = Propiedad.getPropiedadIndice(sistema.getListaPropiedades(),consultaNueva.getPropiedad().getCodigoPropiedad());
                                 if(i != -1)
                                 {
+                                    consultaNueva.setPregunta(true);
                                     sistema.getListaPropiedades().get(i).setConsultada(true);
                                     sistema.agregarConsulta(consultaNueva);
                                 }

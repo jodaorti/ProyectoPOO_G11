@@ -293,7 +293,7 @@ public class Cliente extends Usuario
     {
         System.out.println("\n Buzón de Consultas ");  
         String tipo,rangoPrecio,ciudad,sector;
-        String format = " %1$-10s %2$-20s %3$-10s %4$-10s %5$-50s\n";
+        String format = " %1$-20s %2$-20s %3$-20s %4$-30s %5$-10s\n";
         System.out.format(format,"Fecha","Código Propiedad","Nombre Agente","Pregunta","Estado");
         consultas.sort(new OrdenadorFechaConsultas());
         for(Consulta consulta : consultas)
