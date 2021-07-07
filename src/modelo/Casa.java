@@ -13,8 +13,8 @@ public class Casa extends Propiedad
     }
 
     public Casa(String codigoPropiedad,String descripcion, double precio, double metrosAncho, 
-                double profundidad, Ubicacion ubicacion, int numPisos, int numHabitaciones) {
-        super(codigoPropiedad,descripcion, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.CASA);
+                double profundidad, Ubicacion ubicacion, int numPisos, int numHabitaciones,AgenteVentas agente) {
+        super(codigoPropiedad,descripcion, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.CASA,agente);
         this.numPisos = numPisos;
         this.numHabitaciones = numHabitaciones;
     }

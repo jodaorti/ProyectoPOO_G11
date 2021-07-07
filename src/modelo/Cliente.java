@@ -6,6 +6,7 @@ import java.util.Scanner;
 import tipos.Enum.tipoPropiedad;
 import tipos.Enum.tipoUsuario;
 import utils.ClassUtils;
+import utils.OrdenadorFechaConsultas;
 import utils.ValidatorUtils;
 
 /*
@@ -279,4 +280,69 @@ public class Cliente extends Usuario
         }
         return null;
     }
+    
+    /**
+     * Se muestran las consultas que ha realizado el cliente sobre las propiedades         
+     * @param cliente
+     * @param consultas
+     * @param propiedades
+     * @param sc
+     * @return 
+     */       
+    public static Consulta buzonDeConsultas(Cliente cliente, ArrayList<Consulta> consultas,ArrayList<Propiedad> propiedades, Scanner sc)
+    {
+        System.out.println("\n Buzón de Consultas ");  
+        String tipo,rangoPrecio,ciudad,sector;
+        String format = " %1$-10s %2$-20s %3$-10s %4$-10s %5$-50s\n";
+        System.out.format(format,"Fecha","Código Propiedad","Nombre Agente","Pregunta","Estado");
+        consultas.sort(new OrdenadorFechaConsultas());
+        for(Consulta consulta : consultas)
+        {
+            if(consulta.isPregunta())
+            {
+             System.out.format(format,ClassUtils.dateTimeToString(consulta.getFechaConsulta()),
+                                     consulta.getPropiedad().getCodigoPropiedad(),
+                                     consulta.getPropiedad().getAgenteVentas().getNombre(),
+                                     consulta.getComentario(),
+                                     consulta.isRespondida() ? "Respondido" : "Esperando");
+            }
+        }
+        
+        String codigoPropiedad = "";        
+        System.out.println("\nIngrese el código de la propiedad (o vacío para regresar):");
+        codigoPropiedad = sc.nextLine();            
+        String persona;
+        if(!codigoPropiedad.trim().isEmpty())
+        {
+            String fecha;
+            for(Consulta consulta : consultas)
+            {
+                if(consulta.getPropiedad().getCodigoPropiedad().equalsIgnoreCase(codigoPropiedad))  
+                {
+                    fecha = ClassUtils.dateTimeToString(consulta.getFechaConsulta());
+                    System.out.println(fecha+":"+(consulta.isPregunta() ? "Cliente:" : "Agente:")+consulta.getComentario());               
+                }                                      
+            }
+            
+            String pregunta = "";
+            do
+            {
+                System.out.println("\nDesea realizar agregar un pregunta o regresar (si/no)");
+                pregunta = sc.nextLine();
+            }
+            while(!pregunta.equalsIgnoreCase("SI") && !pregunta.equalsIgnoreCase("NO"));
+            if(pregunta.equalsIgnoreCase("SI"))
+            {
+                Propiedad propConsulta = Propiedad.getPropiedadPorListado(propiedades, codigoPropiedad);
+                String comentario = "";
+                System.out.println("\nIngrese la pregunta:");                
+                comentario = sc.nextLine();
+                if(!comentario.trim().isEmpty())                
+                    return new Consulta(cliente, propConsulta,comentario);                
+            }
+            return null;
+                        
+        }
+        return null;
+    }        
 }

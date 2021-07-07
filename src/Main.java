@@ -122,12 +122,23 @@ public class Main
                                     sistema.agregarConsulta(consultaNueva);
                                 }
                                 
-                            }
-                            
+                            }                            
                             break;
                             
                         case "2":
-                            break;
+                            consultaNueva = Cliente.buzonDeConsultas(clienteActual,sistema.getListaConsultas(),sistema.getListaPropiedades(), sc);
+                            if(consultaNueva != null)
+                            {
+                                int i = Propiedad.getPropiedadIndice(sistema.getListaPropiedades(),consultaNueva.getPropiedad().getCodigoPropiedad());
+                                if(i != -1)
+                                {
+                                    sistema.getListaPropiedades().get(i).setConsultada(true);
+                                    sistema.agregarConsulta(consultaNueva);
+                                }
+                                
+                            }                            
+                            break;                                                        
+                        
                         case "3":
                             break;
                         case "4":
@@ -155,6 +166,7 @@ public class Main
                     switch(opcion)
                     {
                         case "1":
+                            
                             break;
                     
                         case "2":
@@ -192,7 +204,7 @@ public class Main
                     {
                         //Registrar Propiedad
                         case "1":
-                            propiedadNueva = Administrador.registrarPropiedad(sc);
+                            propiedadNueva = Administrador.registrarPropiedad(sistema.getListaAgentes(), sc);
                             sistema.agregarPropiedad(propiedadNueva);                        
                             break;
 

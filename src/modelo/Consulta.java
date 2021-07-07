@@ -7,6 +7,8 @@ public class Consulta {
     private Cliente cliente;
     private Propiedad propiedad;
     private String comentario;
+    private boolean pregunta;
+    private boolean respondida;
     
     public Consulta()
     {
@@ -18,6 +20,8 @@ public class Consulta {
         this.cliente = cliente;
         this.propiedad = propiedad;
         this.comentario = comentario;
+        this.pregunta = false;
+        this.respondida = false;
     }
 
     public LocalDateTime getFechaConsulta() {
@@ -42,6 +46,31 @@ public class Consulta {
 
     public void setPropiedad(Propiedad propiedad) {
         this.propiedad = propiedad;
+    }
+    
+    public boolean isPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(boolean pregunta) {
+        this.pregunta = pregunta;
+    }
+    
+    public boolean isRespondida() {
+        return respondida;
+    }
+
+    public void setRepondida(boolean respondida) {
+        this.respondida = respondida;
+    }
+    
+    public String getComentario()
+    {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
     
     

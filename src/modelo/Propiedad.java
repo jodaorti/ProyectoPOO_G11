@@ -23,6 +23,7 @@ public class Propiedad
     private double profundidad;
     private Ubicacion ubicacion;    
     private tipoPropiedad tipo;
+    private AgenteVentas agente;
     private boolean vendida;
     private boolean consultada;
     
@@ -32,7 +33,7 @@ public class Propiedad
     }
 
     public Propiedad(String codigoPropiedad,String descripcion, double precio, double metrosAncho, double profundidad,
-                     Ubicacion ubicacion, tipoPropiedad tipo) {
+                     Ubicacion ubicacion, tipoPropiedad tipo,AgenteVentas agente) {
         this.codigoPropiedad = codigoPropiedad;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -42,6 +43,7 @@ public class Propiedad
         this.tipo = tipo;
         this.vendida = false;
         this.consultada = false;
+        this.agente = agente;
     }
 
     public String getCodigoPropiedad() {
@@ -108,12 +110,20 @@ public class Propiedad
         this.vendida = vendida;
     }
     
-     public boolean isConsultada() {
+    public boolean isConsultada() {
         return consultada;
     }
 
     public void setConsultada(boolean consultada) {
         this.consultada = consultada;
+    }
+    
+    public AgenteVentas getAgenteVentas() {
+        return agente;
+    }
+
+    public void setAgenteVentas(AgenteVentas agente) {
+        this.agente = agente;
     }
     
     
@@ -145,7 +155,7 @@ public class Propiedad
                 i = 1;
                 for(Propiedad prop : propiedades)  
                 {
-                    if(!prop.vendida)
+                    if(!prop.isVendida())
                     {
                         System.out.format(format,i,"Código: "+prop.getCodigoPropiedad(),
                                                    "Descripcion: "+prop.getDescripcion(),
@@ -153,7 +163,7 @@ public class Propiedad
                                                    "Metros Ancho: "+prop.getMetrosAncho(),
                                                    "Profundidad: "+prop.getProfundidad(),
                                                    "Tipo: "+prop.getTipo(),
-                                                   "Vendida: "+prop.isVendida());                                                
+                                                   "Vendida: NO");                                                
                     }
                     i++;
                 }

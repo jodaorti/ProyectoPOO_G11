@@ -85,7 +85,7 @@ public class ClassUtils {
         metrosAncho = 60;
         profundidad = 10;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Sta Cecilia","norte");
-        Terreno ter1 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.VIVIENDA);
+        Terreno ter1 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.VIVIENDA,ag1);
         sistema.agregarPropiedad(ter1);
         
         codigoPropiedad = "pr2";
@@ -94,7 +94,7 @@ public class ClassUtils {
         metrosAncho = 80;
         profundidad = 20;        
         ubicacion = new Ubicacion("Guayas","Guayaquil","cdla. Alborada","norte");
-        Terreno ter2 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.EMPRESARIAL);
+        Terreno ter2 = new Terreno(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,tipoTerreno.EMPRESARIAL,ag2);
         sistema.agregarPropiedad(ter2);
         
         //Crear Casas
@@ -106,7 +106,7 @@ public class ClassUtils {
         ubicacion = new Ubicacion("Pichincha","Quito","cdla. Concordia","norte");
         numPisos = 2;
         numHabitaciones = 3;
-        Casa casa1 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
+        Casa casa1 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones,ag1);
         sistema.agregarPropiedad(casa1);
         
         codigoPropiedad = "pr4";
@@ -117,7 +117,7 @@ public class ClassUtils {
         ubicacion = new Ubicacion("Pichincha","Quito","cdla. Macarena","norte");
         numPisos = 1;
         numHabitaciones = 2;
-        Casa casa2 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones);
+        Casa casa2 = new Casa(codigoPropiedad,descripcion, precio,metrosAncho,profundidad,ubicacion,numPisos,numHabitaciones,ag2);
         sistema.agregarPropiedad(casa2);
         
         return sistema;

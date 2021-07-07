@@ -13,8 +13,8 @@ public class Terreno extends Propiedad
     }
 
     public Terreno(String codigoPropiedad,String descripcion, double precio, double metrosAncho, 
-                   double profundidad, Ubicacion ubicacion, tipoTerreno tipoT) {
-        super(codigoPropiedad,descripcion, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.TERRENO);
+                   double profundidad, Ubicacion ubicacion, tipoTerreno tipoT,AgenteVentas agente) {
+        super(codigoPropiedad,descripcion, precio, metrosAncho, profundidad, ubicacion,tipoPropiedad.TERRENO,agente);
         this.tipoT = tipoT;
     }
 
