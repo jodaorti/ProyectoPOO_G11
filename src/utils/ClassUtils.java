@@ -1,11 +1,15 @@
 package utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Properties;
 import modelo.Administrador;
 import modelo.AgenteVentas;
 import modelo.Casa;
@@ -15,6 +19,9 @@ import modelo.Terreno;
 import modelo.Ubicacion;
 import modelo.Usuario;
 import tipos.Enum.tipoTerreno;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 
 public class ClassUtils {
     
@@ -172,5 +179,34 @@ public class ClassUtils {
                 return us;            
         }
         return null; 
-    }           
+    }     
+    
+    /**
+    * Enviar correo a la dirección del destinatario de la alerta    
+     * @param correo
+     * @param asunto
+     * @param mensaje
+     * @param usuarios
+     * @param usuario
+     * @return 
+     * @throws java.lang.Exception 
+    */
+    public static void enviarMail(String correo, String asunto, String mensaje) throws Exception{
+        try (InputStream inputStream = new FileInputStream(new File("archivos.properties"))) {
+            Properties prop = new Properties();
+            prop.load(inputStream);
+            Session session = Session.getDefaultInstance(prop);
+            session.setDebug(false);
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("xxmotorsGuayas@gmail.com"));
+            InternetAddress[] x = {new InternetAddress(correo)};
+            message.addRecipients(Message.RecipientType.TO, x);
+            message.setSubject(asunto);
+            message.setText(mensaje);
+            Transport t = session.getTransport("smtp");
+            t.connect("smtp.gmail.com","ventacarros1920", "Ov3rp0w3red");
+            t.sendMessage(message, message.getAllRecipients());
+            t.close();
+        }
+    }
 }

@@ -259,6 +259,12 @@ public class Propiedad
         return null;
     }
     
+    /**
+    * Cargar el indice de la propiedad Cargada
+     * @param propiedades
+     * @param codigo     
+     * @return 
+    */
     public static int getPropiedadIndice(ArrayList<Propiedad> propiedades,String codigo)
     {
         int i = 0;
@@ -269,5 +275,7 @@ public class Propiedad
             i++;
         }
         return -1;
-    }
+    }        
+    
+    
 }

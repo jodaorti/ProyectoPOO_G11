@@ -345,4 +345,66 @@ public class Cliente extends Usuario
         }
         return null;
     }        
+    
+    /**
+     * Se crean las alertas cuando se registre una propiedad con esos parametros
+     * @param cliente
+     * @param consultas
+     * @param propiedades
+     * @param sc
+     * @return 
+     */
+    public static Alerta crearAlerta(Cliente cliente,Scanner sc)
+    {
+        System.out.println("\n Registro de Alerta");        
+        String tipoP,codigoPropiedad,descripcion, prc,mts,prf,provincia,
+               ciudad,direccion,sector,numP,numH = "";
+        
+        double precio,metros,profundidad = 0;
+        int numPisos,numHab = 0;
+        
+        do 
+        {
+            System.out.println("\nSeleccione Terreno(1) o Casa(2): ");
+            tipoP = sc.nextLine();
+        }
+        while(!tipoP.equalsIgnoreCase("1") && !tipoP.equalsIgnoreCase("2"));        
+        do
+        {
+            System.out.println("Precio: ");
+            prc = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(prc));
+        precio = Double.parseDouble(prc);
+        do
+        {
+            System.out.println("Metros de ancho: ");
+            mts = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(mts));
+        metros = Double.parseDouble(mts);
+        do
+        {
+            System.out.println("Profundidad: ");
+            prf = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(prf));
+        profundidad = Double.parseDouble(prf);
+        
+        System.out.println("Provincia: ");
+        provincia = sc.nextLine();
+        System.out.println("Ciudad: ");
+        ciudad = sc.nextLine();        
+        System.out.println("Sector: ");
+        sector = sc.nextLine();  
+        tipoPropiedad t;
+        if(tipoP.equalsIgnoreCase("1"))                        
+           t = tipoPropiedad.TERRENO;
+        else            
+            t = tipoPropiedad.CASA;
+            
+        return new Alerta(precio, metros, profundidad, provincia, ciudad, sector,t,cliente);                   
+           
+    }
+        
 }

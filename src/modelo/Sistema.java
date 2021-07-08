@@ -8,6 +8,7 @@ public class Sistema {
     private ArrayList<Propiedad> listaPropiedades;
     private ArrayList<Administrador> listaAdministradores;
     private ArrayList<Consulta> listaConsultas;
+    private ArrayList<Alerta> listaAlertas;
     
     public Sistema()
     {
@@ -15,7 +16,8 @@ public class Sistema {
         this.listaClientes = new ArrayList<>();
         this.listaAdministradores = new ArrayList<>();
         this.listaPropiedades = new ArrayList<>();     
-        this.listaConsultas = new ArrayList<>();     
+        this.listaConsultas = new ArrayList<>();   
+        this.listaAlertas = new ArrayList<>();
     }
 
     public ArrayList<AgenteVentas> getListaAgentes() {
@@ -56,5 +58,13 @@ public class Sistema {
 
     public void agregarConsulta(Consulta consulta) {
         this.listaConsultas.add(consulta);
+    }
+    
+    public ArrayList<Alerta> getListaAlertas() {
+        return listaAlertas;
+    }
+
+    public void agregarAlerta(Alerta alerta) {
+        this.listaAlertas.add(alerta);
     }
 }

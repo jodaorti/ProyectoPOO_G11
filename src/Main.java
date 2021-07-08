@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import modelo.Administrador;
 import modelo.AgenteVentas;
+import modelo.Alerta;
 import modelo.Cliente;
 import modelo.Consulta;
 import modelo.Propiedad;
@@ -22,12 +23,13 @@ public class Main
     static AgenteVentas agenteNuevo;
     static Propiedad propiedadNueva;
     static Consulta consultaNueva;
+    static Alerta alertaNueva;
     
     static Cliente clienteActual;
     static AgenteVentas agenteActual;
     static Administrador administradorActual;
     static Propiedad propiedadActual;
-    
+    static Alerta alertaActual;
     
     public static void main(String args[])
     {
@@ -49,11 +51,13 @@ public class Main
         agenteNuevo            = new AgenteVentas();
         propiedadNueva         = new Propiedad();
         consultaNueva          = new Consulta();
+        alertaNueva            = new Alerta();
         
         agenteActual           = new AgenteVentas();
         administradorActual    = new Administrador();
         clienteActual          = new Cliente();
         propiedadActual        = new Propiedad();        
+        alertaActual           = new Alerta();
         
         while(!salirSistema)
         {
@@ -141,8 +145,15 @@ public class Main
                             }                            
                             break;                                                        
                         
-                        case "3":
+                        case "3":                            
+                            alertaNueva = Cliente.crearAlerta(clienteActual, sc);
+                            if(alertaNueva != null)
+                            {
+                                sistema.agregarAlerta(alertaNueva);
+                                System.out.println("Alerta agregada correctamente.");
+                            }
                             break;
+                        
                         case "4":
                             break;
                         case "5":
