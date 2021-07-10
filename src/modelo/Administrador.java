@@ -198,7 +198,7 @@ public class Administrador extends Usuario
                     tipoterreno = tipoTerreno.EMPRESARIAL;
                     break;                                       
             }
-            System.out.println("El terreno se registró correctamente...\n");
+            System.out.println("El terreno se registró correctamente...\n");            
             return new Terreno(codigoPropiedad,descripcion, precio,metros,profundidad,ubicacion,tipoterreno,agenteNuevo);                                        
         }                            
         //Casa

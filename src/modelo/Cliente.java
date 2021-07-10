@@ -348,9 +348,7 @@ public class Cliente extends Usuario
     
     /**
      * Se crean las alertas cuando se registre una propiedad con esos parametros
-     * @param cliente
-     * @param consultas
-     * @param propiedades
+     * @param cliente          
      * @param sc
      * @return 
      */
@@ -405,6 +403,80 @@ public class Cliente extends Usuario
             
         return new Alerta(precio, metros, profundidad, provincia, ciudad, sector,t,cliente);                   
            
+    }
+    
+    /**
+     * Se realiza la simulación de prestamos por cualquiera de los dos metodos
+     * @param propiedades
+     * @param sc     
+     */
+    public static void simularPrestamo(ArrayList<Propiedad> propiedades, Scanner sc)
+    {                
+        String format = " %1$-2s %2$-4s %3$-10s %4$-10s %5$-10s %6$-10s %7$-10s %8$-10s\n";        
+        String op = "";
+        int opcion = 0;
+        int i;        
+        do
+        {
+            do 
+            {
+                System.out.println("\n Listado de Propiedades");
+                i = 1;
+                for(Propiedad prop : propiedades)  
+                {
+                    if(!prop.isVendida())
+                    {
+                        System.out.format(format,i,"Código: "+prop.getCodigoPropiedad(),
+                                                   "Descripcion: "+prop.getDescripcion(),
+                                                   "Precio: "+prop.getPrecio(),
+                                                   "Metros Ancho: "+prop.getMetrosAncho(),
+                                                   "Profundidad: "+prop.getProfundidad(),
+                                                   "Tipo: "+prop.getTipo(),
+                                                   "Vendida: NO");                                                
+                    }
+                    i++;
+                }
+                System.out.println("\nEscoger una propiedad: ");
+                op = sc.nextLine();
+            }
+            while(!ValidatorUtils.validarNumero(op));
+            opcion = Integer.parseInt(op) - 1;
+        }
+        while(opcion < 0 || opcion > propiedades.size());
+        Propiedad propiedadSeleccionada =  propiedades.get(opcion); 
+        String metodoCalculo,interes,anios = "";
+        double interesMetodo,anioMetodo = 0;
+        do 
+        {
+            System.out.println("\nSeleccione método de calculo FRANCES(1) o ALEMAN(2): ");
+            metodoCalculo = sc.nextLine();
+        }
+        while(!metodoCalculo.equalsIgnoreCase("1") && !metodoCalculo.equalsIgnoreCase("2"));  
+        do
+        {
+            System.out.println("Interes: ");
+            interes = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(interes));
+        interesMetodo = Double.parseDouble(interes);
+        do
+        {
+            System.out.println("Años: ");
+            anios = sc.nextLine();
+        }
+        while(!ValidatorUtils.validarNumero(anios));
+        anioMetodo = Double.parseDouble(anios);
+        
+        if(metodoCalculo.equalsIgnoreCase("1"))
+        {
+            CalculadoraPrestamoFrances prestamoFrances = new CalculadoraPrestamoFrances();
+            prestamoFrances.calcularPrestamo(propiedadSeleccionada.getPrecio(),interesMetodo,anioMetodo);
+        }                                        
+        else
+        {
+            CalculadoraPrestamoAleman prestamoAleman = new CalculadoraPrestamoAleman();
+            prestamoAleman.calcularPrestamo(propiedadSeleccionada.getPrecio(),interesMetodo,anioMetodo);
+        }
     }
         
 }

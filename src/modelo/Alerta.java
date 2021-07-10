@@ -145,7 +145,7 @@ public class Alerta {
         ArrayList<Alerta> alertFiltroProvincia = new ArrayList<>();
         for(Alerta alerta : alertFiltroProfundidad)
         {
-            if(alerta.getProvincia().trim().isEmpty() && 
+            if(!alerta.getProvincia().trim().isEmpty() && 
                     alerta.getProvincia().equalsIgnoreCase(propiedad.getUbicacion().getProvincia()))
                 alertFiltroProvincia.add(alerta);
         }
@@ -156,7 +156,7 @@ public class Alerta {
         ArrayList<Alerta> alertFiltroCiudad = new ArrayList<>();
         for(Alerta alerta : alertFiltroProvincia)
         {
-            if(alerta.getCiudad().trim().isEmpty() && 
+            if(!alerta.getCiudad().trim().isEmpty() && 
                     alerta.getCiudad().equalsIgnoreCase(propiedad.getUbicacion().getCiudad()))
                 alertFiltroCiudad.add(alerta);
         }
@@ -165,9 +165,9 @@ public class Alerta {
             alertFiltroCiudad = alertFiltroProvincia;
         
         ArrayList<Alerta> alertFiltroSector = new ArrayList<>();
-        for(Alerta alerta : alertFiltroProvincia)
+        for(Alerta alerta : alertFiltroCiudad)
         {
-            if(alerta.getSector().trim().isEmpty() && 
+            if(!alerta.getSector().trim().isEmpty() && 
                     alerta.getSector().equalsIgnoreCase(propiedad.getUbicacion().getSector()))
                 alertFiltroSector.add(alerta);
         }

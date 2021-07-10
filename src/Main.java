@@ -88,7 +88,7 @@ public class Main
                     sistema.agregarCliente(clienteNuevo);                        
                     break;
                 
-                //alir de Sistema 
+                //salir de Sistema 
                 case 3:
                     salirSistema = true;
                     break;
@@ -155,7 +155,9 @@ public class Main
                             break;
                         
                         case "4":
+                            Cliente.simularPrestamo(sistema.getListaPropiedades(), sc);
                             break;
+                                                
                         case "5":
                             System.out.println("\nRegresando...\n");
                             salirCliente = true;                            
@@ -218,6 +220,7 @@ public class Main
                         //Registrar Propiedad
                         case "1":
                             propiedadNueva = Administrador.registrarPropiedad(sistema.getListaAgentes(), sc);
+                            Alerta.verificarAlertasPorEnviar(sistema.getListaAlertas(), propiedadNueva);
                             sistema.agregarPropiedad(propiedadNueva);                        
                             break;
 
