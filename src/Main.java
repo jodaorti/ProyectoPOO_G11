@@ -78,7 +78,7 @@ public class Main
                     usuarioSistema = MenuUtils.verificarEIngresarUsuario(usuarios, sc);
                     if(usuarioSistema == null)                  
                         System.out.println("El usuario no esta registrado\n\n");   
-                    else                                                                  
+                    else                          
                         cargarOpcionesUsuario(salirMenuCliente,salirMenuAgente,salirMenuAdministrador, usuarioSistema, sc);                    
                     break;
 

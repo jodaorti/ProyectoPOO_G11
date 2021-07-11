@@ -185,28 +185,48 @@ public class ClassUtils {
     * Enviar correo a la dirección del destinatario de la alerta    
      * @param correo
      * @param asunto
-     * @param mensaje
-     * @param usuarios
-     * @param usuario
-     * @return 
-     * @throws java.lang.Exception 
-    */
-    public static void enviarMail(String correo, String asunto, String mensaje) throws Exception{
-        try (InputStream inputStream = new FileInputStream(new File("archivos.properties"))) {
-            Properties prop = new Properties();
-            prop.load(inputStream);
-            Session session = Session.getDefaultInstance(prop);
-            session.setDebug(false);
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("xxmotorsGuayas@gmail.com"));
-            InternetAddress[] x = {new InternetAddress(correo)};
-            message.addRecipients(Message.RecipientType.TO, x);
-            message.setSubject(asunto);
-            message.setText(mensaje);
-            Transport t = session.getTransport("smtp");
-            t.connect("smtp.gmail.com","ventacarros1920", "Ov3rp0w3red");
-            t.sendMessage(message, message.getAllRecipients());
-            t.close();
+     * @param mensaje          
+    */              
+    public static void enviarMail(String correo, String asunto, String mensaje) 
+    { 
+        //Correo disponible para usar.
+        String remitente = "ventacarros1920@gmail.com"; 
+        String usuario = "ventacarros1920";
+        String clave = "Ov3rp0w3red";
+        //Para la dirección nomcuenta@gmail.com 
+        Properties props = System.getProperties(); 
+        props.put("mail.smtp.host", "smtp.gmail.com"); 
+        //El servidor SMTP de Google 
+        props.put("mail.smtp.user", remitente); 
+        props.put("mail.smtp.clave", clave); 
+        //La clave de la cuenta 
+        props.put("mail.smtp.auth", "true"); 
+        //Usar autenticación mediante usuario y clave 
+        props.put("mail.smtp.starttls.enable", "true"); 
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        //Para conectar de manera segura al servidor SMTP 
+        props.put("mail.smtp.port", "587"); 
+        //El puerto SMTP seguro de Google 
+        Session session = Session.getDefaultInstance(props); 
+        MimeMessage message = new MimeMessage(session); 
+        try 
+        { 
+            message.setFrom(new InternetAddress(remitente)); 
+            message.addRecipients(Message.RecipientType.TO,correo);         
+        
+            //Se podrían añadir varios de la misma manera 
+            message.setSubject(asunto); 
+            message.setText(mensaje); 
+            Transport transport = session.getTransport("smtp"); 
+            transport.connect("smtp.gmail.com",usuario,clave); 
+            transport.sendMessage(message, message.getAllRecipients()); 
+            transport.close(); 
+            System.out.println("Información de alerta enviada exitosamente"); 
+        }
+        catch (MessagingException me) 
+        { 
+            me.printStackTrace(); 
+            //Si se produce un error 
         }
     }
 }
